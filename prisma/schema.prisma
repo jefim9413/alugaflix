@@ -6,3 +6,37 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id      String    @id @default(uuid())
+  nome    String
+  email   String
+  Aluguel Aluguel[]
+
+  @@map("user")
+}
+
+model Filme {
+  id             String    @id @default(uuid())
+  titulo         String
+  descricao      String
+  ano_lancamento Int
+  genero         String
+  diretor        String
+  disponivel     Boolean
+  Aluguel        Aluguel[]
+
+  @@map("filme")
+}
+
+model Aluguel {
+  id             String   @id @default(uuid())
+  data_aluguel   DateTime
+  data_devolucao DateTime
+  status         String
+
+  user_id  String
+  user     User   @relation(fields: [user_id], references: [id])
+  filme_id String
+  filme    Filme  @relation(fields: [filme_id], references: [id])
+}
