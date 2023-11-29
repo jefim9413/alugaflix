@@ -3,6 +3,8 @@ import { CreateUserController } from '../../../modules/user/usecases/createUser/
 import { ListUserController } from '../../../modules/user/usecases/listUser/ListUserController'
 import { RemoveUserController } from '../../../modules/user/usecases/removeUser/RemoveUserController'
 import { UpdateUserController } from '../../../modules/user/usecases/updateUser/UpdateUserController'
+import { ensureAuthenticated } from '../middlewares/ensureAuthenticated'
+import { isAdmin } from '../middlewares/isAdmin'
 
 export const usersRouter = Router()
 const createUserController = new CreateUserController()
