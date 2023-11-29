@@ -7,15 +7,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id      String    @id @default(uuid())
-  nome    String
-  email   String
-  Aluguel Aluguel[]
-
-  @@map("user")
-}
-
 model Filme {
   id             String    @id @default(uuid())
   titulo         String
@@ -29,6 +20,16 @@ model Filme {
   @@map("filme")
 }
 
+model User {
+  id       String    @id @default(uuid())
+  nome     String
+  email    String
+  password String
+  Aluguel  Aluguel[]
+
+  @@map("user")
+}
+
 model Aluguel {
   id             String   @id @default(uuid())
   data_aluguel   DateTime
@@ -36,7 +37,9 @@ model Aluguel {
   status         String
 
   user_id  String
-  user     User   @relation(fields: [user_id], references: [id])
+  user     User   @relation(fields: [user_id], references: [id], onDelete: Cascade)
   filme_id String
   filme    Filme  @relation(fields: [filme_id], references: [id])
+
+  @@map("aluguel")
 }
