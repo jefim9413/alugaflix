@@ -6,9 +6,9 @@ import { IFilmeRepository } from '../../../filme/repositories/IFilmeRepository'
 export class DevolverAluguelUseCase {
   constructor(
     @inject('AluguelRepository')
+    private aluguelRepository: IAluguelRepository,
     @inject('FilmeRepository')
     private filmeRepository: IFilmeRepository,
-    private aluguelRepository: IAluguelRepository,
   ) {}
 
   async execute(id: string) {

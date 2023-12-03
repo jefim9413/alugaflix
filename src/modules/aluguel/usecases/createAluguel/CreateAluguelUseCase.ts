@@ -6,9 +6,9 @@ import { IFilmeRepository } from '../../../filme/repositories/IFilmeRepository'
 export class CreateAluguelUseCase {
   constructor(
     @inject('AluguelRepository')
+    private aluguelRepository: IAluguelRepository,
     @inject('FilmeRepository')
     private filmeRepository: IFilmeRepository,
-    private aluguelRepository: IAluguelRepository,
   ) {}
 
   async execute(user_id: string, filme_id: string) {
@@ -25,6 +25,7 @@ export class CreateAluguelUseCase {
     await this.filmeRepository.update(filme_id, {
       disponivel: false,
     })
+
     const data_aluguel = new Date()
     const data_devolucao = new Date(
       data_aluguel.setDate(data_aluguel.getDate() + 7),

@@ -8,6 +8,6 @@ export const router = Router()
 
 router.use('/users', usersRouter)
 router.use('/filmes', filmeRouter)
-router.use('/alguel', aluguelRouter)
+router.use('/aluguel', aluguelRouter)
 
 router.use(authenticateRouter)
