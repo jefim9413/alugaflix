@@ -42,6 +42,16 @@ export class AluguelRepository implements IAluguelRepository {
     return aluguel
   }
 
+  async findByUserId(id: string) {
+    const alugueis = await prisma.aluguel.findMany({
+      where: {
+        user_id: id,
+      },
+    })
+
+    return alugueis
+  }
+
   async findAll() {
     const alugueis = await prisma.aluguel.findMany()
 

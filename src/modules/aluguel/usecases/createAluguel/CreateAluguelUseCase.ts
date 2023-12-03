@@ -17,6 +17,14 @@ export class CreateAluguelUseCase {
     if (!filme) {
       throw new Error('Filme não encontrado')
     }
+
+    if (!filme.disponivel) {
+      throw new Error('Filme pendente')
+    }
+
+    await this.filmeRepository.update(filme_id, {
+      disponivel: false,
+    })
     const data_aluguel = new Date()
     const data_devolucao = new Date(
       data_aluguel.setDate(data_aluguel.getDate() + 7),
